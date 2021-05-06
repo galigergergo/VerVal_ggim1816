@@ -57,7 +57,7 @@ class ServiceTest {
 
     @org.junit.jupiter.api.Test
     @DisplayName("checking if homework save works")
-    void saveValidHomework() {
+    void saveValidHomeworkOld() {
         Homework hw = new Homework("77", "some easy homework", 6, 2);
         int result = service.saveHomework(hw.getID(), hw.getDescription(), hw.getDeadline(), hw.getStartline());
         assertEquals(0, result);
@@ -134,6 +134,30 @@ class ServiceTest {
         Student s = new Student("333", "Bela", 522);
         service.saveStudent(s.getID(), s.getName(), s.getGroup());
         int result = service.updateStudent(s.getID(), "Jani", 523);
+        assertEquals(1, result);
+    }
+
+    @Test
+    void saveValidHomework(){
+        Homework hw = new Homework("999", "math homework", 8, 6);
+        int result = service.saveHomework(hw.getID(), hw.getDescription(), hw.getDeadline(), hw.getStartline());
+        assertEquals(1, result);
+        service.deleteHomework(hw.getID());
+    }
+
+    @Test
+    void deleteSavedHomework(){
+        Homework hw = new Homework("333", "math homework", 8, 6);
+        service.saveHomework(hw.getID(), hw.getDescription(), hw.getDeadline(), hw.getStartline());
+        int result = service.deleteHomework(hw.getID());
+        assertEquals(1, result);
+    }
+
+    @Test
+    void updateSavedHomework(){
+        Homework hw = new Homework("333", "math homework", 8, 6);
+        service.saveHomework(hw.getID(), hw.getDescription(), hw.getDeadline(), hw.getStartline());
+        int result = service.updateHomework(hw.getID(), "inf homework", 7, 5);
         assertEquals(1, result);
     }
 }
