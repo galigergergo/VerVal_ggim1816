@@ -113,5 +113,27 @@ class ServiceTest {
         service.deleteStudent(s.getID());
     }
 
+    @Test
+    void saveValidStudent(){
+        Student s = new Student("999", "Bela", 522);
+        int result = service.saveStudent(s.getID(), s.getName(), s.getGroup());
+        assertEquals(1, result);
+        service.deleteStudent(s.getID());
+    }
 
+    @Test
+    void deleteSavedStudent(){
+        Student s = new Student("333", "Bela", 522);
+        service.saveStudent(s.getID(), s.getName(), s.getGroup());
+        int result = service.deleteStudent(s.getID());
+        assertEquals(1, result);
+    }
+
+    @Test
+    void updateSavedStudent(){
+        Student s = new Student("333", "Bela", 522);
+        service.saveStudent(s.getID(), s.getName(), s.getGroup());
+        int result = service.updateStudent(s.getID(), "Jani", 523);
+        assertEquals(1, result);
+    }
 }
