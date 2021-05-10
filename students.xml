@@ -4,6 +4,10 @@
         <Name>Maria</Name>
         <Group>222</Group>
     </student>
+    <student ID="123">
+        <Name>Bela</Name>
+        <Group>522</Group>
+    </student>
     <student ID="333">
         <Name>Jani</Name>
         <Group>523</Group>

@@ -2,6 +2,7 @@ package service;
 
 import domain.Grade;
 import domain.Homework;
+import domain.Pair;
 import domain.Student;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -158,6 +159,32 @@ class ServiceTest {
         Homework hw = new Homework("333", "math homework", 8, 6);
         service.saveHomework(hw.getID(), hw.getDescription(), hw.getDeadline(), hw.getStartline());
         int result = service.updateHomework(hw.getID(), "inf homework", 7, 5);
+        assertEquals(1, result);
+    }
+
+    @Test
+    void saveValidGrade(){
+        String idStudent = "1111";
+        String idHw = "2222";
+
+        Student s = new Student(idStudent, "Bela", 522);
+        service.saveStudent(s.getID(), s.getName(), s.getGroup());
+
+        Homework hw = new Homework(idHw, "math homework", 8, 6);
+        service.saveHomework(hw.getID(), hw.getDescription(), hw.getDeadline(), hw.getStartline());
+
+        int result = service.saveGrade(idStudent, idHw, 6.0, 34, "feedback");
+        assertEquals(1, result);
+
+        service.deleteHomework(idHw);
+        service.deleteStudent(idStudent);
+    }
+
+    @Test
+    void saveInvalidGrade(){
+        String idStudent = "9999";
+        String idHw = "7777";
+        int result = service.saveGrade(idStudent, idHw, 6.0, 34, "feedback");
         assertEquals(1, result);
     }
 }
